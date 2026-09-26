@@ -2,8 +2,9 @@ from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 
 from fastapi.staticfiles import StaticFiles
+from pathlib import Path
 
-from .database import init_db
+from database import init_db
 
 from .routes import router
 
@@ -25,7 +26,7 @@ app.mount(
     "/static",
 
     StaticFiles(
-        directory="static"
+        directory=Path(__file__).resolve().parent.parent / "templates" / "static"
     ),
 
     name="static"
